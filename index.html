@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio — Trinidad Jano</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-green: #0A3323;
+            --moss-green: #839958;
+            --beige: #F7F4D5;
+            --rosy-brown: #D3968C;
+            --midnight-green: #105666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark-green);
+            color: var(--beige);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(16, 86, 102, 0.45) 0%, transparent 45%),
+                radial-gradient(circle at 85% 50%, rgba(131, 153, 88, 0.22) 0%, transparent 50%),
+                radial-gradient(circle at 20% 85%, rgba(211, 150, 140, 0.14) 0%, transparent 45%);
+        }
+
+        /* Contenedor principal centrado */
+        .wrapper {
+            max-width: 1120px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 4.5rem 2rem 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Encabezado Editorial */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 720px;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: var(--rosy-brown);
+            border: 1px solid rgba(211, 150, 140, 0.4);
+            padding: 0.45rem 1.2rem;
+            border-radius: 50px;
+            margin-bottom: 1.4rem;
+            background-color: rgba(16, 86, 102, 0.25);
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.8rem, 6vw, 4.4rem);
+            font-weight: 600;
+            line-height: 1.05;
+            color: var(--beige);
+            margin-bottom: 1rem;
+        }
+
+        h1 span {
+            font-style: italic;
+            color: var(--rosy-brown);
+        }
+
+        .subtitle {
+            font-size: 1.05rem;
+            color: rgba(247, 244, 213, 0.78);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* Filtros de categoría */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            background-color: rgba(16, 86, 102, 0.25);
+            color: var(--beige);
+            border: 1px solid rgba(131, 153, 88, 0.4);
+            padding: 0.55rem 1.3rem;
+            border-radius: 50px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--rosy-brown);
+            color: var(--rosy-brown);
+        }
+
+        .filter-btn.active {
+            background-color: var(--rosy-brown);
+            color: var(--dark-green);
+            border-color: var(--rosy-brown);
+            font-weight: 600;
+        }
+
+        /* Grilla de Proyectos */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 2.2rem;
+            width: 100%;
+        }
+
+        /* Tarjetas */
+        .card {
+            background-color: var(--beige);
+            color: var(--dark-green);
+            border-radius: 26px;
+            padding: 2.5rem 2.1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+            border: 1px solid rgba(131, 153, 88, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.28);
+            animation: fadeUp 0.45s ease;
+        }
+
+        .card.hidden {
+            display: none;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 28px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.6rem;
+        }
+
+        .project-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            font-weight: 700;
+            color: var(--midnight-green);
+        }
+
+        .tag {
+            font-size: 0.74rem;
+            font-weight: 600;
+            padding: 0.35rem 0.9rem;
+            border-radius: 20px;
+            background-color: rgba(131, 153, 88, 0.22);
+            color: var(--dark-green);
+        }
+
+        .card h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.05rem;
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--dark-green);
+            margin-bottom: 0.9rem;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            line-height: 1.65;
+            color: rgba(10, 51, 35, 0.8);
+            margin-bottom: 2.1rem;
+        }
+
+        /* Botones */
+        .btn-project {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--midnight-green);
+            color: var(--beige);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dark-green);
+            box-shadow: 0 8px 20px rgba(16, 86, 102, 0.35);
+        }
+
+        .btn-secondary {
+            background-color: var(--rosy-brown);
+            color: var(--dark-green);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--moss-green);
+            color: var(--beige);
+            box-shadow: 0 8px 20px rgba(131, 153, 88, 0.35);
+        }
+
+        .btn-muted {
+            background-color: rgba(131, 153, 88, 0.28);
+            color: var(--dark-green);
+            cursor: default;
+        }
+
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-project:hover .arrow {
+            transform: translate(3px, -3px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            font-size: 0.85rem;
+            color: rgba(247, 244, 213, 0.55);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .palette-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1px solid rgba(247, 244, 213, 0.25);
+        }
+
+        @media (max-width: 600px) {
+            .wrapper {
+                padding: 3rem 1.4rem 2rem;
+            }
+            .card {
+                padding: 2rem 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <header>
+            <span class="badge">Portafolio Interactivo</span>
+            <h1>Proyectos de <br><span>Trinidad Jano</span></h1>
+            <p class="subtitle">
+                Exploraciones de computación física, sonido generativo e interfaces interactivas conectadas entre hardware y la web.
+            </p>
+        </header>
+
+        <!-- Barra de filtros -->
+        <nav class="filter-bar">
+            <button class="filter-btn active" onclick="filtrar('todos', this)">Todos (7)</button>
+            <button class="filter-btn" onclick="filtrar('audio', this)">Audio & Interfaces</button>
+            <button class="filter-btn" onclick="filtrar('arduino', this)">Arduino & Hardware</button>
+        </nav>
+
+        <main class="projects-grid">
+            <!-- 01. Lámina de Interfaz -->
+            <article class="card" data-category="audio">
+                <div>
+                    <div class="card-top">
+                        <span class="project-number">01.</span>
+                        <span class="tag">Diseño • Interfaz</span>
+                    </div>
+                    <h2>Lámina de Interfaz</h2>
+                    <p>
+                        Presentación visual e interactiva de arquitectura de interfaz y exploración gráfica en formato web.
+                    </p>
+                </div>
+                <a href="https://trinijano2006-svg.github.io/lamina/" target="_blank" class="btn-project btn-primary">
+                    Abrir proyecto <span class="arrow">↗</span>
+                </a>
+            </article>
+
+            <!-- 02. Transcripción de Audio -->
+            <article class="card" data-category="audio">
+                <div>
+                    <div class="card-top">
+                        <span class="project-number">02.</span>
+                        <span class="tag">p5.js • Voz en vivo</span>
+                    </div>
+                    <h2>Transcripción de Audio</h2>
+                    <p>
+                        Aplicación web de reconocimiento de voz en tiempo real con visualización dinámica de volumen y ondas sonoras.
+                    </p>
+                </div>
+                <a href="https://trinijano2006-svg.github.io/transcripcion/" target="_blank" class="btn-project btn-secondary">
+                    Abrir proyecto <span class="arrow">↗</span>
+                </a>
+            </article>
+
+            <!-- 03. Juego de Audios Musicales -->
+            <article class="card" data-category="audio">
+                <div>
+                    <div class="card-top">
+                        <span class="project-number">03.</span>
+                        <span class="tag">Audio • Juego</span>
+                    </div>
+                    <h2>Juego de Audios Musicales</h2>
+                    <p>
+                        Desafío interactivo de entrenamiento auditivo y reconocimiento sonoro contra reloj desarrollado en HTML y JavaScript.
+                    </p>
+                </div>
+                <a href="https://trinijano2006-svg.github.io/juego-audio-musical/" target="_blank" class="btn-project btn-primary">
+                    Abrir proyecto <span class="arrow">↗</span>
+                </a>
+            </article>
+
+            <!-- 04. Sonificación de Imagen -->
+            <article class="card" data-category="audio">
+                <div>
+                    <div class="card-top">
+                        <span class="project-number">04.</span>
+                        <span class="tag">Sinestesia • RGB</span>
+                    </div>
+                    <h2>Sonificación de Imagen</h2>
+                    <p>
+                        Traducción audiovisual que transforma valores de color RGB y texturas de imagen en notas acústicas de piano y guitarra.
+                    </p>
+                </div>
+                <a href="https://trinijano2006-svg.github.io/sonificador-/" target="_blank" class="btn-project btn-secondary">
+                    Abrir proyecto <span class="arrow">↗</span>
+                </a>
+            </article>
+
+            <!-- 05. Sintetizador Max -->
+            <article class="card" data-category="audio">
+                <div>
+                    <div class="card-top">
+                        <span class="project-number">05.</span>
+                        <span class="tag">Max/MSP • Síntesis</span>
+                    </div>
+                    <h2>Sintetizador Max</h2>
+                    <p>
+                        Patch de síntesis sonora manual diseñado en Max/MSP para la generación y modulación de frecuencias en tiempo real.
+                    </p>
+                </div>
+                <span class="btn-project btn-muted">
+                    Patch nativo Max/MSP
+                </span>
+            </article>
+
+            <!-- 06. Juego Arduino Pizza Personal -->
+            <article class="card" data-category="arduino">
+                <div>
+                    <div class="card-top">
+                        <span class="project-number">06.</span>
+                        <span class="tag">Web Serial • Arduino</span>
+                    </div>
+                    <h2>Juego Arduino: Pizza Personal</h2>
+                    <p>
+                        Experiencia interactiva controlada directamente desde componentes físicos en Arduino conectados al navegador.
+                    </p>
+                </div>
+                <a href="https://trinijano2006-svg.github.io/juego-arduino-pizza-personal/" target="_blank" class="btn-project btn-primary">
+                    Abrir proyecto <span class="arrow">↗</span>
+                </a>
+            </article>
+
+            <!-- 07. Rapunzel Luz Arduino -->
+            <article class="card" data-category="arduino">
+                <div>
+                    <div class="card-top">
+                        <span class="project-number">07.</span>
+                        <span class="tag">Web Serial • Iluminación</span>
+                    </div>
+                    <h2>Rapunzel Luz Arduino</h2>
+                    <p>
+                        Interfaz interactiva de control lumínico conectada con Arduino para dar vida a la iluminación en tiempo real.
+                    </p>
+                </div>
+                <a href="https://trinijano2006-svg.github.io/rapunzel-luz-arduino/" target="_blank" class="btn-project btn-secondary">
+                    Abrir proyecto <span class="arrow">↗</span>
+                </a>
+            </article>
+        </main>
+    </div>
+
+    <footer>
+        <div class="palette-dots">
+            <span class="dot" style="background: #0A3323;"></span>
+            <span class="dot" style="background: #839958;"></span>
+            <span class="dot" style="background: #F7F4D5;"></span>
+            <span class="dot" style="background: #D3968C;"></span>
+            <span class="dot" style="background: #105666;"></span>
+        </div>
+        <p>Trinidad Jano • Diseño & Computación Física</p>
+    </footer>
+
+    <script>
+        function filtrar(categoria, boton) {
+            // Actualizar botón activo
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            boton.classList.add('active');
+
+            // Mostrar u ocultar tarjetas según categoría
+            const tarjetas = document.querySelectorAll('.card');
+            tarjetas.forEach(tarjeta => {
+                if (categoria === 'todos' || tarjeta.dataset.category === categoria) {
+                    tarjeta.classList.remove('hidden');
+                } else {
+                    tarjeta.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
